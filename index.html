@@ -13,38 +13,12 @@
             </div>
             <div class="todo__add_sort">
                 <div class="todo__add_task__wrapper">
-                    <input type="text" name="todo__add" id="todo__add" placeholder="Что будем делать?">
-                    <button>+</button>
+                    <input type="text" name="todo__add__input" id="todo__add__input" placeholder="Что будем делать?">
+                    <button class="todo__add__button">+</button>
                 </div>
-                <select class="task__status" size="1">
-                    <option value="active" >Все</option>
-                    <option value="active">Не сделано</option>
-                    <option value="in process">В процессе</option>
-                    <option value="done">Сделано</option>
-                </select>
             </div>
 
-            <div class="todo__list">
-                <span class="todo__list__no_elements">Нет никаких дел</span>
-                <div class="todo__list__item">
-                    <span class="task__name">Шаблон задачи</span>
-                    <select class="task__status" size="1">
-                        <option value="active">Не сделано</option>
-                        <option value="in process">В процессе</option>
-                        <option value="done">Сделано</option>
-                    </select>
-                    <button>Удалить</button>
-                </div>
-                <div class="todo__list__item">
-                    <span class="task__name">Шаблон задачи</span>
-                    <select name="status" size="1">
-                        <option value="active">Не сделано</option>
-                        <option value="in process">В процессе</option>
-                        <option value="done">Сделано</option>
-                    </select>
-                    <button>Удалить</button>
-                </div>
-            </div>
+            <div class="todo__list"></div>
         </div>
     </div>
     <script src="index.js"></script>
