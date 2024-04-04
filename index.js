@@ -13,10 +13,10 @@ const displayTaskList = () => {
         todoListHTMLBlock.innerHTML = `<span class="todo__list__no_elements">Нет никаких дел</span>`
     }
     
-    addEvemtListeners()   
+    addEventListeners()   
 }
 
-const addEvemtListeners = () => {
+const addEventListeners = () => {
     const taskInput = document.querySelector('#todo__add__input')
     if (taskInput) {
         taskInput.addEventListener('keydown', (e) => {
@@ -34,7 +34,7 @@ const addEvemtListeners = () => {
     deleteTaskBtn.forEach(item => {
         item.addEventListener('click', (e) => {
             const task = e.target.closest('.todo__list__item')
-            deleteTast(task)
+            deleteTask(task)
         } )
     })
 
@@ -62,7 +62,7 @@ const createTask = (input) => {
     }
 }
 
-const deleteTast = (deletingTask) => {
+const deleteTask = (deletingTask) => {
     let todoList = JSON.parse(localStorage.getItem('todo'))
     todoList = todoList.filter((task) => !task.includes(deletingTask.id))
     localStorage.setItem('todo', JSON.stringify(todoList))
