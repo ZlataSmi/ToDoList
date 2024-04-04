@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>ToDo List</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <div class="content">
@@ -11,13 +12,10 @@
             <div class="todo__header">
                 <h1>Список задач</h1>
             </div>
-            <div class="todo__add_sort">
-                <div class="todo__add_task__wrapper">
-                    <input type="text" name="todo__add__input" id="todo__add__input" placeholder="Что будем делать?">
-                    <button class="todo__add__button">+</button>
-                </div>
+            <div class="todo__add">
+                <input type="text" autocomplete="off" id="todo__add__input" placeholder="Что будем делать?">
+                <button class="todo__add__button">+</button>
             </div>
-
             <div class="todo__list"></div>
         </div>
     </div>
