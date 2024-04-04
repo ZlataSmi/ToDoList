@@ -1,6 +1,7 @@
+let todoList = JSON.parse(localStorage.getItem('todo')) || []
+
 const displayTaskList = () => {
     const todoListHTMLBlock = document.querySelector('.todo__list')
-    const todoListStorage = JSON.parse(localStorage.getItem('todo'))
 
     if (todoListStorage && todoListStorage.length> 0) {
         todoListStorage.sort((a) => a.includes('isdone="true"') ? 1 : -1)
@@ -49,7 +50,6 @@ const addEventListeners = () => {
 
 const createTask = (input) => {
     if (input.value != '') {
-        const todoList = JSON.parse(localStorage.getItem('todo')) || []
         const newTask = `<div class="todo__list__item" id=${Date.now()}>
                             <span class="task__name">${input.value}</span>
                             <span class="task__status" isdone = false>Не выполнено</span>
@@ -63,14 +63,12 @@ const createTask = (input) => {
 }
 
 const deleteTask = (deletingTask) => {
-    let todoList = JSON.parse(localStorage.getItem('todo'))
     todoList = todoList.filter((task) => !task.includes(deletingTask.id))
     localStorage.setItem('todo', JSON.stringify(todoList))
     displayTaskList()
 }
 
 const changeTaskStatus = (changingTask) => {
-    let todoList = JSON.parse(localStorage.getItem('todo'))
     let taskIndex = todoList.findIndex((task) => task.includes(changingTask.id))
     let status = changingTask.querySelector('.task__status')
     if (status.getAttribute('isdone') == 'false') {
