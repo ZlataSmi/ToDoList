@@ -11,7 +11,7 @@ const displayTaskList = () => {
             todoListItems += `<div class="todo__list__item" time=${item.time}>
                                 <span class="task__name">${item.name}</span>
                                 <span class="task__status" isDone = ${item.isDone}>${item.isDone ? 'Сделано' : 'Сделать'}</span>
-                                <button class="task__delete"><img class="task__delete__img"src="/img/delete.png" alt="Удалить"></button>
+                                <button class="task__delete"><img class="task__delete__img"src="./img/delete.png" alt="Удалить"></button>
                             </div>`
         }
         todoListHTMLBlock.innerHTML = todoListItems
