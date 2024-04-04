@@ -3,11 +3,16 @@ let todoList = JSON.parse(localStorage.getItem('todo')) || []
 const displayTaskList = () => {
     const todoListHTMLBlock = document.querySelector('.todo__list')
 
-    if (todoListStorage && todoListStorage.length> 0) {
-        todoListStorage.sort((a) => a.includes('isdone="true"') ? 1 : -1)
+    if (todoList && todoList.length> 0) {
+        todoList.sort((a, b) => a.time > b.time ? 1 : -1 )
+        todoList.sort((a) => a.isDone === true ? 1 : -1)
         let todoListItems = ''
-        for (let item of todoListStorage) {
-            todoListItems += item
+        for (let item of todoList) {
+            todoListItems += `<div class="todo__list__item" time=${item.time}>
+                                <span class="task__name">${item.name}</span>
+                                <span class="task__status" isDone = ${item.isDone}>${item.isDone ? 'Сделано' : 'Сделать'}</span>
+                                <button class="task__delete">Удалить</button>
+                            </div>`
         }
         todoListHTMLBlock.innerHTML = todoListItems
     } else {
@@ -50,11 +55,11 @@ const addEventListeners = () => {
 
 const createTask = (input) => {
     if (input.value != '') {
-        const newTask = `<div class="todo__list__item" id=${Date.now()}>
-                            <span class="task__name">${input.value}</span>
-                            <span class="task__status" isdone = false>Не выполнено</span>
-                            <button class="task__delete">Удалить</button>
-                        </div>`
+        const newTask = {
+            name: input.value,
+            time: Date.now(),
+            isDone: false
+        }
         todoList.push(newTask)
         localStorage.setItem('todo', JSON.stringify(todoList))
         input.value = ''
@@ -63,22 +68,17 @@ const createTask = (input) => {
 }
 
 const deleteTask = (deletingTask) => {
-    todoList = todoList.filter((task) => !task.includes(deletingTask.id))
+    todoList = todoList.filter((task) => task.time != deletingTask.attributes.time.value)
     localStorage.setItem('todo', JSON.stringify(todoList))
     displayTaskList()
 }
 
 const changeTaskStatus = (changingTask) => {
-    let taskIndex = todoList.findIndex((task) => task.includes(changingTask.id))
-    let status = changingTask.querySelector('.task__status')
-    if (status.getAttribute('isdone') == 'false') {
-        status.innerHTML = 'Выполнено'
-        status.setAttribute('isdone', 'true')
-    } else {
-        status.innerHTML = 'Не выполнено'
-        status.setAttribute('isdone', 'false')
+    for (let task of todoList) {
+        if (task.time == changingTask.attributes.time.value) {
+            task.isDone = !task.isDone
+        }
     }
-    todoList[taskIndex] = changingTask.outerHTML 
     localStorage.setItem('todo', JSON.stringify(todoList))
     displayTaskList()
 }
